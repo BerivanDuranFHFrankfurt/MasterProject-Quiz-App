@@ -1,0 +1,118 @@
+
+<ResultScreen>:
+    FloatLayout:
+        Image:
+            source: 'background.png'  # Hintergrundbild
+            allow_stretch: True
+            keep_ratio: False
+
+        Image:
+            source: 'speech_bubble_big.png'  # Bild für die große Sprechblase
+            size_hint_y: None
+            height: 675
+            pos_hint: {'center_x': 0.5, 'top': 0.99}
+
+        Label:
+            text: 'Quiz Ergebnisse'  # Überschrift
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 40
+            color: 0, 0, 0, 1
+            halign: 'center'
+            valign: 'middle'
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.45, 'top': 0.9}
+
+        Label:
+            text: 'Leistungszusammenfassung'  # Überschrift für die Leistungszusammenfassung
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 32
+            color: 0, 0, 0, 1
+            halign: 'center'
+            valign: 'middle'
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.45, 'top': 0.82}
+
+        Label:
+            text: ""
+            id: performance_summary_label
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 28
+            color: 0, 0, 0, 1
+            halign: 'center'
+            valign: 'middle'
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.45, 'top': 0.77}
+
+        Label:
+            text: ""
+            id: remaining_time_label
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 28
+            color: 0, 0, 0, 1
+            halign: 'center'
+            valign: 'middle'
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.45, 'top': 0.72}
+
+        ScrollView:
+            size_hint: (1, None)
+            height: 250
+            pos_hint: {'center_x': 0.55, 'top': 0.67}
+            
+            GridLayout:
+                cols: 1
+                spacing: 10
+                size_hint_y: None
+                height: self.minimum_height
+
+                # Hier fügen Sie Labels für jede Frage hinzu
+                Label:
+                    text: ''
+                    id: incorrect_answers_label  
+                    markup: True 
+                    font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+                    font_size: 30
+                    color: 0, 0, 0, 1
+                    halign: 'left'
+                    valign: 'middle'
+                    size_hint: None, None
+                    size: self.texture_size
+                    pos_hint: {'center_x': 0.5, 'top': 0.96}
+
+
+        ResultButton:
+            text: 'Zurück zur Startseite'
+            on_release:  
+                app.root.current = 'start'
+                app.root.transition.direction = 'right'
+            pos_hint: {'center_x': 0.35, 'y': 0.1}
+      
+        ResultButton:
+            text: 'Applikation schließen'
+            on_release: root.close_app()
+            pos_hint: {'center_x': 0.65, 'y': 0.1}
+        
+        Image:
+            source: 'pandabar.png'  # Das Quiz-Guide-Bild
+            size_hint: None, None
+            size: 125,125 # Größe des Quiz-Guide-Bilds auf 1/10 des Bildschirms einstellen
+            pos_hint: {'center_x': 0.4, 'center_y': 0.245}  # Position des Quiz-Guide-Bilds
+
+<ResultButton>:
+   
+    font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+    font_size: 28
+    size_hint: None, None
+    size: 300, 75  # Hier können Sie die Breite und Höhe anpassen
+    background_color: 1, 0.7, 0, 0  # Transparent (RGBA-Format)
+    canvas.before:
+        Color:
+            rgba: 1, 0.7, 0, 1# Oragnene Farbe (RGBA-Format)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15, 15]  # Radius für abgerundete Ecken

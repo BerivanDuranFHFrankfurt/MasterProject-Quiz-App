@@ -1,0 +1,105 @@
+<CategoryScreen>:
+    FloatLayout:
+        orientation: 'vertical'
+        Image:
+            source: 'background.png'  # Hintergrundbild
+            allow_stretch: True
+            keep_ratio: False
+
+        Label:
+            text: "Kategorie"
+            font_size: 65
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            color: 0, 0,  0.7, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.35, 'center_y': 0.75}
+
+        GridLayout:
+            cols: 2
+            spacing: 30
+            padding: 30
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+
+            CategoryButton:
+                text: 'Wissenschaft'
+                size_hint: None, None
+                on_release: 
+                    root.set_category("Wissenschaft")
+                    app.root.current = 'difficulty'
+                    app.root.transition.direction = 'left'
+
+            CategoryButton:
+                text: 'IT'
+                size_hint: None, None
+                on_release: 
+                    root.set_category("IT")
+                    app.root.current = 'difficulty'
+                    app.root.transition.direction = 'left'
+
+            CategoryButton:
+                text: 'Geografie'
+                size_hint: None, None
+                on_release: 
+                    root.set_category("Geografie")
+                    app.root.current = 'difficulty'
+                    app.root.transition.direction = 'left'
+            CategoryButton:
+                text: 'Geschichte'
+                size_hint: None, None
+                on_release: 
+                    root.set_category("Geschichte")
+                    app.root.current = 'difficulty'
+                    app.root.transition.direction = 'left'
+        Button:
+            text: 'Zurück'
+            on_release: 
+                app.root.current = 'start'
+                app.root.transition.direction = 'right'  # Übergangseffekt von rechts nach links
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 20
+            size_hint: None, None
+            size: 150, 50  # Hier können Sie die Breite und Höhe anpassen
+            pos_hint: {'center_x': 0.4, 'center_y': 0.2}  # Position des Zurück-Buttons
+            background_color: 1, 0.7, 0, 0  # Gelb Orange Farbe (RGBA-Format)
+            canvas.before:
+                Color:
+                    rgba: 1, 0.7, 0, 1  # Gelb Orange Farbe (RGBA-Format)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15, 15]
+        Image:
+            source: 'pandabar.png'  # Das Quiz-Guide-Bild
+            size_hint: None, None
+            size: 150,150 # Größe des Quiz-Guide-Bilds auf 1/10 des Bildschirms einstellen
+            pos_hint: {'center_x': 0.55, 'center_y': 0.225}  # Position des Quiz-Guide-Bilds
+
+        Image:
+            source: 'speech_bubble_2.png'  # Sprechblase-Bild neben dem Zurück-Button
+            size_hint: None, None
+            size: 400,400
+            pos_hint: {'center_x': 0.8, 'center_y': 0.35}
+
+        Label:
+            text: "Bevor wir starten, \nhaben wir 4 spannende \nKategorien für dich. \nWelche interessiert dich \nam meisten? Tippe \neinfach auf deine Wahl, \num weiterzukommen!"
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 25
+            size_hint: None, None
+            size: self.texture_size
+            color:  rgba(0, 0, 0, 255)
+            pos_hint: {'center_x': 0.825, 'center_y': 0.35}
+
+<CategoryButton>:
+    font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+    font_size: 45
+    size_hint: None, None
+    size: 350, 100  # Hier können Sie die Breite und Höhe anpassen
+    background_color: 1, 0.7, 0, 0  # Transparent (RGBA-Format)
+    canvas.before:
+        Color:
+            rgba: 0, 0,  0.7, 1# Blaue Farbe (RGBA-Format)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15, 15]  # Radius für abgerundete Ecken

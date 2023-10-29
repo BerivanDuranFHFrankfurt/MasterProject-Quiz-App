@@ -1,0 +1,93 @@
+<DifficultyScreen>:
+    FloatLayout:
+        orientation: 'vertical'
+        Image:
+            source: 'background.png'  # Hintergrundbild
+            allow_stretch: True
+            keep_ratio: False
+
+        Label:
+            text: "Schwierigkeitsgrad"
+            font_size: 65
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            color: 0, 0,  0.7, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.35, 'center_y': 0.75}
+
+        BoxLayout:
+            orientation: 'vertical'  # Anordnung der Buttons untereinander
+            spacing: 20
+            padding: 20
+            pos_hint: {'center_x': 0.65, 'center_y': 0.775}
+
+            DifficultyButton:
+                text: 'Leicht'
+                size_hint: None, None
+                on_release: root.set_difficulty("Leicht")
+                custom_color: [0, 0, 0.7, 1]
+            DifficultyButton:
+                text: 'Mittel'
+                size_hint: None, None
+                on_release: root.set_difficulty("Mittel")
+                custom_color: [0, 0 ,0.5, 1]
+            DifficultyButton:
+                text: 'Schwer'
+                size_hint: None, None
+                on_release: root.set_difficulty("Schwer")
+                custom_color: [0, 0 ,0.3, 1]
+
+        Button:
+            text: 'Zurück'
+            on_release: 
+                app.root.current = 'category'
+                app.root.transition.direction = 'right'  # Übergangseffekt von rechts nach links
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 20
+            size_hint: None, None
+            size: 200, 50  # Hier können Sie die Breite und Höhe anpassen
+            pos_hint: {'center_x': 0.4, 'center_y': 0.2}  # Position des Zurück-Buttons
+            background_color: 1, 0.7, 0, 0  # Gelb Orange Farbe (RGBA-Format)
+            canvas.before:
+                Color:
+                    rgba: 1, 0.7, 0, 1  # Gelb Orange Farbe (RGBA-Format)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15, 15]
+
+        Image:
+            source: 'pandabar.png'  # Das Quiz-Guide-Bild
+            size_hint: None, None
+            size: 150,150 # Größe des Quiz-Guide-Bilds auf 1/10 des Bildschirms einstellen
+            pos_hint: {'center_x': 0.55, 'center_y': 0.225}  # Position des Quiz-Guide-Bilds
+
+        Image:
+            source: 'speech_bubble_2.png'  # Sprechblase-Bild neben dem Zurück-Button
+            size_hint: None, None
+            size: 400,400
+            pos_hint: {'center_x': 0.8, 'center_y': 0.35}
+
+        Label:
+            text: "Ein letzter Schritt bevor \nes endlich los geht! \nWähle dein gewünschtes \nSchwierigkeitsniveau, \num dein Wissen auf die \nProbe zu stellen! Du hast \n5 Minuten Zeit."
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 25
+            size_hint: None, None
+            size: self.texture_size
+            color:  rgba(0, 0, 0, 255)
+            pos_hint: {'center_x': 0.825, 'center_y': 0.35}
+
+<DifficultyButton>:
+    custom_color: [1, 0, 0, 1]
+    font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+    font_size: 45
+    size_hint: None, None
+    size: 350, 100  # Hier können Sie die Breite und Höhe anpassen
+    background_color: 1, 0.7, 0, 0  # Transparent (RGBA-Format)
+    canvas.before:
+        Color:
+            rgba: self.custom_color  # Verwenden Sie die benutzerdefinierte Farbe
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15, 15]

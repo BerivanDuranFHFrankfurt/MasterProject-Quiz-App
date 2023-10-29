@@ -1,0 +1,150 @@
+
+<FragerundeScreen>:
+    FloatLayout:
+        Image:
+            source: 'background.png'  # Hintergrundbild
+            allow_stretch: True
+            keep_ratio: False
+
+        
+        # Bild innerhalb der Sprechblase
+        Image:
+            source: 'speech_bubble_vertical.png'  # Bild für die Sprechblase
+            size_hint_y: None
+            height: 375
+            pos_hint: {'center_x': 0.5, 'top': 0.9}
+
+        Label:
+            id: question_label  # Achten Sie darauf, dass das Label eine ID hat
+            text: '' 
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 32
+            color: 0, 0, 0, 1
+            halign: 'center'  # Text zentrieren
+            valign: 'middle'
+            size_hint: None, None
+            size: self.texture_size  # Die Größe des Labels wird an den Text angepasst
+            pos_hint: {'center_x': 0.5, 'top': 0.75}  # Position anpassen
+
+
+        GridLayout:
+            cols: 2
+            spacing: 30
+            pos_hint: {'center_x': 0.625, 'top': 0.35}  # Position anpassen
+            AntwortButton:
+                id: answer_button_1  
+                text: ""  # Hier die Antwortmöglichkeiten eintragen
+                on_release: root.check_answer(self.text)
+                
+            AntwortButton:
+                id: answer_button_2
+                text: ""
+                on_release: root.check_answer(self.text)
+
+            AntwortButton:
+                id: answer_button_3
+                text: ""
+                on_release: root.check_answer(self.text)
+
+            AntwortButton:
+                id: answer_button_4  
+                text: ""
+                on_release: root.check_answer(self.text)
+
+        HintButton:
+            text: "?"  # Hier das Fragezeichen-Symbol für Hinweise
+            id:  hinweis_button
+            pos_hint: {'center_x': 0.9, 'top': 0.75}  # Position anpassen
+            on_release: root.show_hint()
+
+        Label:
+            text: root.remaining_time  # Hier die verbleibende Zeit anzeigen
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 25
+            bold: True
+            color: 0, 0, 0, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.8, 'top': 0.95 }
+        
+        Label:
+            text: root.current_question_label  
+            id: current_question_label
+            font_size: 65
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            color: 0, 0,  0.7, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.15, 'top': 0.99}
+
+        Image:
+            source: 'pandabar.png'  # Das Quiz-Guide-Bild
+            size_hint: None, None
+            size: 125,125 # Größe des Quiz-Guide-Bilds auf 1/10 des Bildschirms einstellen
+            pos_hint: {'center_x': 0.25, 'center_y': 0.4125}  # Position des Quiz-Guide-Bilds
+
+        Button:
+            text: 'Abbrechen'
+            id: abbruch_button
+            on_release: 
+                root.cancel_quiz()
+                app.root.transition.direction = 'right'  # Übergangseffekt von rechts nach links
+            font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+            font_size: 20
+            size_hint: None, None
+            size: 150, 50  # Hier können Sie die Breite und Höhe anpassen
+            pos_hint: {'center_x': 0.85, 'center_y': 0.05}  # Position des Zurück-Buttons
+            background_color: 1, 0.7, 0, 0  # Gelb Orange Farbe (RGBA-Format)
+            canvas.before:
+                Color:
+                    rgba: 1, 0.7, 0, 1  # Gelb Orange Farbe (RGBA-Format)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [15, 15]
+<AntwortButton>:
+    font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+    font_size: 35
+    size_hint: None, None
+    size: 450, 100  # Hier können Sie die Breite und Höhe anpassen
+    background_color: 1, 1, 1, 0  # Transparent (RGBA-Format)
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0.7, 1  # Verwenden Sie die benutzerdefinierte Farbe
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15, 15]
+       
+<HintButton>:
+    custom_color: [1, 0.7, 0, 1]
+    font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+    font_size: 45
+    size_hint: None, None
+    size: 50, 50  # Hier können Sie die Breite und Höhe anpassen
+    background_color: 1, 0.7, 0, 0  # Transparent (RGBA-Format)
+    canvas.before:
+        Color:
+            rgba: self.custom_color  # Verwenden Sie die benutzerdefinierte Farbe
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15, 15]
+
+<HintPopup>:
+    title: 'Hinweis'
+    size_hint: 0.5, 0.5
+    auto_dismiss: True
+
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Weißer Hintergrund (RGBA-Format)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            id: hint_label
+            text: ''
+            color: 0, 0, 0.5, 1 

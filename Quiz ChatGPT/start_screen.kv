@@ -1,0 +1,54 @@
+<StartScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        FloatLayout:
+            Image:
+                source: 'background.png'  # Hintergrundbild
+                allow_stretch: True  # Ermöglicht das Strecken des Bildes, um die gesamte Bildschirmgröße zu decken
+                keep_ratio: False  # Deaktiviert das Beibehalten des Seitenverhältnisses, um die volle Bildschirmgröße zu nutzen
+
+            Button:
+                text: 'Start'
+                on_release: 
+                    app.root.current = 'category'
+                    app.root.transition.direction = 'left'  # Übergangseffekt von links nach rechts
+                font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+                font_size: 55
+                size_hint: None, None
+                size: 450, 125  # Hier können Sie die Breite und Höhe anpassen
+                pos_hint: {'center_x': 0.45, 'center_y': 0.225}  # Position des Start-Buttons
+                background_color: 1, 0.5, 0, 0  # Transparent
+                canvas.before:
+                    Color:
+                        rgba: 1, 0.7, 0, 1   # Gelb Orange Farbe (RGBA-Format)
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [15, 15]  # Radius für abgerundete Ecken
+            
+            Label:
+                text: 'PANDA'
+                font_size: 85
+                font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+                color: 0, 0, 0.7, 1
+                pos_hint: {'center_x': 0.475, 'center_y': 0.8}  # Position des Texts
+
+            Image:
+                source: 'speech_bubble.png'  # Das Sprechblasen-Bild
+                size_hint: None, None
+                size: 400,400  # Größe der Sprechblase etwas größer als der Quiz-Guide
+                pos_hint: {'center_x': 0.725, 'center_y': 0.5}  # Position der Sprechblase
+            Label:
+                text: "Willkommen bei \nPANDA! \nIch bin Momo, dein \nQuiz-Guide. Bereit, dein \nWissen zu testen? Drücke \n'START' und finde heraus, \nwie schlau du bist!" 
+                font_name: 'C:\\Quiz ChatGPT\\ADLaM_Display\\ADLaMDisplay-Regular.ttf' #Pfad hier anpassen 
+                font_size: 25
+                size_hint: None, None
+                size: self.texture_size
+                color:  rgba(0, 0, 0, 255)
+                pos_hint: {'center_x': 0.75, 'center_y': 0.53}
+            Image:
+                source: 'pandabar.png'  # Das Quiz-Guide-Bild
+                size_hint: None, None
+                size: 250,250 # Größe des Quiz-Guide-Bilds auf 1/10 des Bildschirms einstellen
+                pos_hint: {'center_x': 0.455, 'center_y': 0.5}  # Position des Quiz-Guide-Bilds
+
