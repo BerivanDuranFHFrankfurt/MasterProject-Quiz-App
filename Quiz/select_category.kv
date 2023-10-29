@@ -1,0 +1,97 @@
+<CategoryButton>:
+    font_name: "ADLaM_Display"
+    font_size: "40sp"
+    background_color: 1, 1, 1, 0
+    on_release: app.select_quiz_category(self.text)
+    canvas.before:
+        Color:
+            rgb: root.bg_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.x, self.y + 5
+            radius: [10]
+
+<CategoryScreen>:
+    name: 'select_category'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    FloatLayout:
+        Image: 
+            source: "background.png"
+        Label:
+            text: "KATEGORIE"
+            font_name: "ADLaM_Display"
+            font_size: "50sp"
+            halign: "center"
+            pos_hint: {"center_x": .35, "center_y": .8}
+            color:  rgba(29, 29, 171, 255)
+            line_height: 1.1
+
+        GridLayout:
+            rows: 2
+            cols: 2
+            size_hint: .6, .3
+            pos_hint: {"center_x": .35, "center_y": .5}
+            spacing: 15
+            CategoryButton:
+                text: "Wissenschaft"
+                bg_color: rgba(35, 33, 132, 255)
+            CategoryButton:
+                text: "IT"
+                bg_color: rgba(29, 29, 171, 255)
+            CategoryButton:
+                text: "Geografie"
+                bg_color: rgba(29, 29, 171, 255)
+            CategoryButton:
+                text: "Geschichte"
+                bg_color: rgba(35, 33, 132, 255)
+     
+        Button:
+            text: "Zurück"
+            font_name: "ADLaM_Display"
+            font_size: "15sp"
+            size_hint: .10, .075
+            pos_hint: {"center_x": .525, "center_y": .15}
+            background_color: 1, 1, 1, 0
+            on_release:
+                root.manager.current = "start"
+            canvas.before:
+                Color:
+                    rgb: rgba(251, 187, 29, 255)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.x, self.y + 5
+                    radius: [10]
+                    
+        BoxLayout: 
+            pos_hint: {"center_x": .65, "center_y": .35}         
+            padding: 300
+            spacing:10
+            BoxLayout:
+            Image:
+                source: "pandabar.png"
+                pos_hint:{"right":0.02,"top":0.05}
+            BoxLayout:
+                padding: -90
+                orientation: 'vertical'
+
+                Image: 
+                    source: "speech_bubble_2.png"
+                    pos_hint:{"top":0.8}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        spacing:10
+                        pos: (1000, 125)
+                        size: (300,310)
+                        Label: 
+                            text: "Bevor wir starten, \nhaben wir 4 spannende \nKategorien für dich. \nWelche interessiert dich \nam meisten? Tippe \neinfach auf deine Wahl, \num weiterzukommen!"
+                            font_name: "ADLaM_Display"
+                            font_size: "18sp"
+                            halign: "center"
+                            pos_hint: { "center_y": .55}
+                            color:  rgba(0, 0, 0, 255)
+                            line_height: 1.1

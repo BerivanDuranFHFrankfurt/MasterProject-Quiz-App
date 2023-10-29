@@ -1,0 +1,73 @@
+<StartScreen>:
+    name: 'start'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    FloatLayout:
+        Image: 
+            source: "background.png"
+        Label: 
+            text: "BAMBOO" # Titel
+            font_name: "ADLaM_Display"
+            font_size: "65sp"
+            halign: "center"
+            pos_hint: {"center_x": .5, "center_y": .8}
+            color:  rgba(29, 29, 171, 255)
+            line_height: 1.1
+        BoxLayout:          
+            padding: 200
+            spacing:60
+            BoxLayout:
+            Image:
+                source: "pandabar.png" #QuizGuide
+                pos_hint:{"right":0.1,"top":0.95}
+            BoxLayout:
+                padding: -65
+                orientation: 'vertical'
+                Image: 
+                    source: "speech_bubble.png" # Sprechblase
+                    pos_hint:{"top":0.8}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        spacing:10
+                        pos: (885, 252)
+                        size: (300,310)
+                        Label:
+                            text: "Willkommen bei \nBAMBOO!"
+                            font_name: "ADLaM_Display"
+                            font_size: "22sp"
+                            markup: True
+                            halign: "center"
+                            pos_hint: { "center_y": .4}
+                            color:  rgba(0, 0, 0, 255)
+                            line_height: 1.1
+                        Label: 
+                            text: "Ich bin Momo, dein \nQuiz-Guide. Bereit, \ndein Wissen zu testen? \nDrücke 'START' und \nfinde heraus, wie schlau \ndu bist!"
+                            font_name: "ADLaM_Display"
+                            font_size: "18sp"
+                            halign: "center"
+                            pos_hint: { "center_y": .4}
+                            color:  rgba(0, 0, 0, 255)
+                            line_height: 1.1
+                        
+                                           
+        Button: 
+            text: "START"
+            font_name: "ADLaM_Display"
+            font_size: "40sp"
+            size_hint: .30, .15
+            pos_hint: {"center_x": .5, "center_y": .15}
+            background_color: 1, 1, 1, 0
+            on_release: 
+                root.manager.current = "select_category"
+            canvas.before:
+                Color:
+                    rgb: rgba(255, 192, 0, 255)
+                RoundedRectangle:
+                    size: self.size  
+                    pos: self.x, self.y + 5
+                    radius: [15]
+            

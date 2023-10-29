@@ -1,0 +1,106 @@
+
+<OptionButton>:
+    font_name: "ADLaM_Display"
+    font_size: "25sp"
+    line_height: 0.75
+    background_color: 1, 0, 1, 0
+    on_press: app.select_quiz_answer(self.text)
+    canvas.before:
+        Color:
+            rgb: (40/255, 6/255, 109/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.x, self.y + 5
+            radius: [10]
+   
+
+<QuizScreen>:
+    name: 'quiz'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+        Image: 
+            source: "background.png"
+        BoxLayout:
+            size_hint: 1, .6
+            pos_hint: {"center_x": .25, "center_y": .525} 
+            padding: 175   
+            Image:
+                source: "pandabar.png"
+                pos_hint:{"left":0.9,"top":0.01}
+        Label: 
+            text: ""
+            id: currentquestion
+            font_name: "ADLaM_Display"
+            font_size: "40sp"
+            halign: "center"
+            pos_hint: {"center_x": .3, "center_y": .95}
+            color: rgba(29, 29, 171, 255)
+            line_height: 1.1
+        BoxLayout:
+            size_hint: 1, .475
+            pos_hint: {"center_x": .5, "center_y": .65} 
+            Image: 
+                source: "speech_bubble_vertical.png"
+                pos_hint: {"center_x": 2, "center_y": 0.5}
+                
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing:10
+                    pos: (550, 400)
+                    size: (300,310)    
+                    Label: 
+                        id: question
+                        text: ""
+                        font_name: "ADLaM_Display"
+                        font_size: "25sp"
+                        pos_hint: {"center_x": .3, "center_y": .75}
+                        halign: "center"
+                        color: 0, 0, 0, 1
+                        line_height: 1.1
+                    Button:
+                        text: "?"
+                        font_name: "ADLaM_Display"
+                        font_size: "20sp"
+                        size_hint: .15, .1
+                        pos_hint: {"center_x": 1.85, "center_y": 550}
+                        background_color: 1, 1, 1, 0
+                        on_release: root.show_popup("")  # Öffnen Sie das Popup mit dem gewünschten Text
+                        canvas.before:
+                            Color:
+                                rgb: rgba(251, 187, 29, 255)
+                            RoundedRectangle:
+                                size: self.size  
+                                pos: self.pos
+                                radius: [10]
+
+        GridLayout:
+            id: option_layout
+            rows: 2
+            cols: 2
+            size_hint: .6, .275
+            pos_hint: {"center_x": .4, "center_y": .2}
+            spacing: 15
+            
+
+        Button: 
+            text: "Abbruch"
+            font_name: "ADLaM_Display"
+            font_size: "15sp"
+            size_hint: .10, .075
+            pos_hint: {"center_x": .825, "center_y": .10}
+            background_color: 1, 1, 1, 0
+            on_release:
+                root.manager.current = "start"
+            canvas.before:
+                Color:
+                    rgb: rgba(251, 187, 29, 255)
+                RoundedRectangle:
+                    size: self.size  
+                    pos: self.x, self.y + 5
+                    radius: [10]
